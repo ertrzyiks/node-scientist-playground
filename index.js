@@ -1,17 +1,7 @@
-var MyExperiment = require('./MyExperiment');
-var Promise = require('bluebird');
+var MyModel = require('./MyModel');
 
-var experiment = new MyExperiment('getData');
-
-experiment.use(function () {
-    return Promise.resolve(true);
+var m = new MyModel()
+m.myMethod(function (err, value) {
+    // err === undefined, candidate error is not passed through.
+    // value === 7, from `.use`.
 });
-
-experiment.try(function () {
-    return Promise.resolve(false);
-});
-
-experiment.run()
-    .then(function (result) {
-        // result === true, from `.use`.
-    });

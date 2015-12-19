@@ -7,7 +7,7 @@ var Promise = require('bluebird');
 function MyExperiment (name) {
     Experiment.call(this, name)
 }
-util.inherits(MyExperiment, Experiment)
+util.inherits(MyExperiment, Experiment);
 
 /**
  * Publisher function. Takes a result, must return a Promise.
@@ -25,6 +25,6 @@ MyExperiment.prototype.publish = function (result) {
     console.log('Improvement Time (+larger is better):', control.duration - candidate.duration)
 
     return Promise.resolve(true);
-}
+};
 
 module.exports = MyExperiment;

@@ -4,7 +4,7 @@ var util = require('util');
 var Promise = require('bluebird');
 
 function MyModel () {}
-util.inherits(MyModel, Scientist)
+util.inherits(MyModel, Scientist);
 
 MyModel.prototype.myMethod = function (cb) {
     var experiment = this.science('myMethod', { Experiment: MyExperiment });
@@ -18,6 +18,6 @@ MyModel.prototype.myMethod = function (cb) {
     });
 
     experiment.run().asCallback(cb)
-}
+};
 
 module.exports = MyModel;

@@ -2,6 +2,7 @@ var MyModel = require('./MyModel');
 
 var m = new MyModel()
 m.myMethod(function (err, value) {
-    // err === undefined, candidate error is not passed through.
-    // value === 7, from `.use`.
+    console.log('----------------------');
+    console.log("MY METHOD VALUE", value);
+    console.log('----------------------');
 });

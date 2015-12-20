@@ -1,8 +1,18 @@
+var express = require('express');
+var app = express();
+
 var MyModel = require('./MyModel');
 
-var m = new MyModel()
-m.myMethod(function (err, value) {
-    console.log('----------------------');
-    console.log("MY METHOD VALUE", value);
-    console.log('----------------------');
+app.get('/', function (req, res) {
+    var m = new MyModel();
+
+    m.getPoints(function (err, value) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+
+        res.json(value);
+    });
 });
+
+app.listen(3000);

@@ -2,19 +2,36 @@ var Scientist = require('node-scientist');
 var MyExperiment = require('./MyExperiment');
 var util = require('util');
 var Promise = require('bluebird');
+var deepEqual = require('deep-equal');
 
 function MyModel () {}
 util.inherits(MyModel, Scientist);
 
-MyModel.prototype.myMethod = function (cb) {
-    var experiment = this.science('myMethod', { Experiment: MyExperiment });
+MyModel.prototype.getPoints = function (cb) {
+    var experiment = this.science('getPoints', { Experiment: MyExperiment });
+
+    experiment.compare(function (control, candidate) {
+        return deepEqual(control.value, candidate.value);
+    });
 
     experiment.use(function () {
-        return Promise.resolve().delay(10).return(7);
+        return new Promise(function (resolve, reject) {
+           setTimeout(function () {
+               resolve([
+                   { x: 1, y: 0}
+               ]);
+           }, 1 * 1000);
+        });
     });
 
     experiment.try(function () {
-        return Promise.resolve().delay(5).throw(new Error('foo'));
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve([
+                    { x: 1, y: 0 }
+                ]);
+            }, 3 * 1000);
+        });
     });
 
     experiment.run().asCallback(cb)

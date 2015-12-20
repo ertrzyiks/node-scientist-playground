@@ -12,6 +12,8 @@
   "dependencies": {
     "101": "^1.2.0",
     "bluebird": "^3.1.1",
+    "deep-equal": "^1.0.1",
+    "express": "^4.13.3",
     "node-scientist": "^1.0.1"
   }
 }
